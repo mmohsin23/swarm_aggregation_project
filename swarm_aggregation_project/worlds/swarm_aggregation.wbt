@@ -1,0 +1,781 @@
+#VRML_SIM R2025a utf8
+
+WorldInfo {
+  title "Swarm Aggregation Multi Scenario"
+  basicTimeStep 32
+}
+Viewpoint {
+  orientation 0.410763 0.846884 0.337722 1.0295
+  position 0 -6.4 5.25
+  followType "None"
+}
+Background {
+  skyColor [
+    0.36 0.55 0.78
+  ]
+}
+DirectionalLight {
+  direction -0.45 -0.35 -1
+  intensity 1.05
+  castShadows TRUE
+}
+PointLight {
+  location 0 0 3.5
+  intensity 0.42
+  color 1 0.96 0.88
+  attenuation 0 0 1
+}
+Solid {
+  translation 0 0 -0.02
+  name "ground"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.78 0.82 0.78
+        roughness 0.92
+      }
+      geometry Box {
+        size 8.4 8.4 0.035
+      }
+    }
+  ]
+  boundingObject Box {
+    size 8.4 8.4 0.035
+  }
+}
+Solid {
+  translation 0 4.08 0.18
+  name "north_wall"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.18 0.20 0.23
+        roughness 0.55
+      }
+      geometry Box {
+        size 8.3 0.10 0.36
+      }
+    }
+  ]
+  boundingObject Box {
+    size 8.3 0.10 0.36
+  }
+}
+Solid {
+  translation 0 -4.08 0.18
+  name "south_wall"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.18 0.20 0.23
+        roughness 0.55
+      }
+      geometry Box {
+        size 8.3 0.10 0.36
+      }
+    }
+  ]
+  boundingObject Box {
+    size 8.3 0.10 0.36
+  }
+}
+Solid {
+  translation 4.08 0 0.18
+  name "east_wall"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.18 0.20 0.23
+        roughness 0.55
+      }
+      geometry Box {
+        size 0.10 8.3 0.36
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.10 8.3 0.36
+  }
+}
+Solid {
+  translation -4.08 0 0.18
+  name "west_wall"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.18 0.20 0.23
+        roughness 0.55
+      }
+      geometry Box {
+        size 0.10 8.3 0.36
+      }
+    }
+  ]
+  boundingObject Box {
+    size 0.10 8.3 0.36
+  }
+}
+DEF target_region Solid {
+  translation 0 0 0.016
+  name "target_region"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        transparency 0.42
+        roughness 0.45
+      }
+      geometry DEF target_cylinder Cylinder {
+        height 0.026
+        radius 0.90
+      }
+    }
+  ]
+}
+DEF obstacle1 Solid {
+  translation 0 0 -1.2
+  name "obstacle1"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.10 0.10 0.12
+        roughness 0.7
+      }
+      geometry DEF obstacle1_cylinder Cylinder {
+        height 0.30
+        radius 0.28
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.30
+    radius 0.28
+  }
+}
+DEF obstacle2 Solid {
+  translation 0 0 -1.2
+  name "obstacle2"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.10 0.10 0.12
+        roughness 0.7
+      }
+      geometry DEF obstacle2_cylinder Cylinder {
+        height 0.30
+        radius 0.28
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.30
+    radius 0.28
+  }
+}
+DEF obstacle3 Solid {
+  translation 0 0 -1.2
+  name "obstacle3"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.10 0.10 0.12
+        roughness 0.7
+      }
+      geometry DEF obstacle3_cylinder Cylinder {
+        height 0.30
+        radius 0.25
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.30
+    radius 0.25
+  }
+}
+DEF obstacle4 Solid {
+  translation 0 0 -1.2
+  name "obstacle4"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.10 0.10 0.12
+        roughness 0.7
+      }
+      geometry DEF obstacle4_cylinder Cylinder {
+        height 0.30
+        radius 0.27
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.30
+    radius 0.27
+  }
+}
+DEF obstacle5 Solid {
+  translation 0 0 -1.2
+  name "obstacle5"
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.10 0.10 0.12
+        roughness 0.7
+      }
+      geometry DEF obstacle5_cylinder Cylinder {
+        height 0.30
+        radius 0.24
+      }
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.30
+    radius 0.24
+  }
+}
+DEF robot1 Robot {
+  translation -2.45 -1.75 0.09
+  rotation 0 0 1 0.30
+  name "robot1"
+  controller "swarm_controller"
+  supervisor TRUE
+  synchronization TRUE
+  customData "scenario=easy;reset=0;target=0,0;radius=0.9;obstacles="
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.12 0.35 0.86
+        roughness 0.45
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.145
+      }
+    }
+    Transform {
+      translation 0.105 0 0.052
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.74 0.12
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.075 0.045 0.03
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 2.3
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.09
+    radius 0.145
+  }
+  physics Physics {
+    mass 0.20
+  }
+}
+DEF robot2 Robot {
+  translation -2.40 1.75 0.09
+  rotation 0 0 1 -0.30
+  name "robot2"
+  controller "swarm_controller"
+  supervisor TRUE
+  synchronization TRUE
+  customData "scenario=easy;reset=0;target=0,0;radius=0.9;obstacles="
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.12 0.35 0.86
+        roughness 0.45
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.145
+      }
+    }
+    Transform {
+      translation 0.105 0 0.052
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.74 0.12
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.075 0.045 0.03
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 2.3
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.09
+    radius 0.145
+  }
+  physics Physics {
+    mass 0.20
+  }
+}
+DEF robot3 Robot {
+  translation 2.45 -1.75 0.09
+  rotation 0 0 1 2.80
+  name "robot3"
+  controller "swarm_controller"
+  supervisor TRUE
+  synchronization TRUE
+  customData "scenario=easy;reset=0;target=0,0;radius=0.9;obstacles="
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.12 0.35 0.86
+        roughness 0.45
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.145
+      }
+    }
+    Transform {
+      translation 0.105 0 0.052
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.74 0.12
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.075 0.045 0.03
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 2.3
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.09
+    radius 0.145
+  }
+  physics Physics {
+    mass 0.20
+  }
+}
+DEF robot4 Robot {
+  translation 2.40 1.75 0.09
+  rotation 0 0 1 -2.80
+  name "robot4"
+  controller "swarm_controller"
+  supervisor TRUE
+  synchronization TRUE
+  customData "scenario=easy;reset=0;target=0,0;radius=0.9;obstacles="
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.12 0.35 0.86
+        roughness 0.45
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.145
+      }
+    }
+    Transform {
+      translation 0.105 0 0.052
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.74 0.12
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.075 0.045 0.03
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 2.3
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.09
+    radius 0.145
+  }
+  physics Physics {
+    mass 0.20
+  }
+}
+DEF robot5 Robot {
+  translation -0.75 -2.75 0.09
+  rotation 0 0 1 1.35
+  name "robot5"
+  controller "swarm_controller"
+  supervisor TRUE
+  synchronization TRUE
+  customData "scenario=easy;reset=0;target=0,0;radius=0.9;obstacles="
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.12 0.35 0.86
+        roughness 0.45
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.145
+      }
+    }
+    Transform {
+      translation 0.105 0 0.052
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.74 0.12
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.075 0.045 0.03
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 2.3
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.09
+    radius 0.145
+  }
+  physics Physics {
+    mass 0.20
+  }
+}
+DEF robot6 Robot {
+  translation 0.75 2.75 0.09
+  rotation 0 0 1 -1.35
+  name "robot6"
+  controller "swarm_controller"
+  supervisor TRUE
+  synchronization TRUE
+  customData "scenario=easy;reset=0;target=0,0;radius=0.9;obstacles="
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.12 0.35 0.86
+        roughness 0.45
+        metalness 0
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.145
+      }
+    }
+    Transform {
+      translation 0.105 0 0.052
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.74 0.12
+            roughness 0.5
+          }
+          geometry Box {
+            size 0.075 0.045 0.03
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.112 -0.02
+      rotation 1 0 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.02 0.02 0.02
+            roughness 0.75
+          }
+          geometry Cylinder {
+            height 0.03
+            radius 0.048
+          }
+        }
+      ]
+    }
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "inertial unit"
+    }
+    Emitter {
+      name "emitter"
+      channel 1
+      range 2.3
+    }
+    Receiver {
+      name "receiver"
+      channel 1
+    }
+  ]
+  boundingObject Cylinder {
+    height 0.09
+    radius 0.145
+  }
+  physics Physics {
+    mass 0.20
+  }
+}
+DEF scenario_manager Robot {
+  name "scenario_manager"
+  controller "scenario_supervisor"
+  supervisor TRUE
+  synchronization TRUE
+  children [ ]
+}

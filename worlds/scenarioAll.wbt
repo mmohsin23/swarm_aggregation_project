@@ -1,0 +1,229 @@
+#VRML_SIM R2023b utf8
+WorldInfo {
+  title "Swarm Aggregation - Easy/Medium/Hard (Keys 1,2,3)"
+}
+Viewpoint {
+  orientation 0.577 0.577 0.577 0.785
+  position 3 4 6
+}
+Background {
+  skyColor [ 0.4 0.6 0.9 ]
+}
+DirectionalLight {
+  direction 0.5 -1 -0.3
+  intensity 0.9
+}
+PointLight {
+  location 0 0 2
+  intensity 0.3
+}
+# Ground
+Solid {
+  translation 0 0 -0.1
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.8 0.8 0.8 }
+      geometry Plane { size 8 8 }
+    }
+  ]
+  boundingObject Plane { size 8 8 }
+  name "ground"
+}
+# Target region
+Solid {
+  translation 0 0 0.02
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 1 0 0 transparency 0.3 }
+      geometry Cylinder { height 0.05 radius 0.8 }
+    }
+  ]
+  name "target_region"
+}
+# ========== WALLS ==========
+Solid { translation 3.5 0 0 children [ Shape { appearance PBRAppearance { baseColor 0.5 0.5 0.5 } geometry Box { size 0.2 0.5 7 } } ] boundingObject Box { size 0.2 0.5 7 } physics Physics { density 1000 } }
+Solid { translation -3.5 0 0 children [ Shape { appearance PBRAppearance { baseColor 0.5 0.5 0.5 } geometry Box { size 0.2 0.5 7 } } ] boundingObject Box { size 0.2 0.5 7 } physics Physics { density 1000 } }
+Solid { translation 0 0 3.5 children [ Shape { appearance PBRAppearance { baseColor 0.5 0.5 0.5 } geometry Box { size 7 0.5 0.2 } } ] boundingObject Box { size 7 0.5 0.2 } physics Physics { density 1000 } }
+Solid { translation 0 0 -3.5 children [ Shape { appearance PBRAppearance { baseColor 0.5 0.5 0.5 } geometry Box { size 7 0.5 0.2 } } ] boundingObject Box { size 7 0.5 0.2 } physics Physics { density 1000 } }
+
+# ========== ROBOT 1 ==========
+DEF robot1 Robot {
+  translation -1.2 0.8 0.1
+  name "robot1"
+  controller "swarm_controller"
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.2 0.5 0.8 } geometry Box { size 0.4 0.4 0.1 } }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor -0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "left wheel motor" } ]
+      endPoint Solid {
+        translation -0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor 0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "right wheel motor" } ]
+      endPoint Solid {
+        translation 0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    GPS { name "gps" translation 0 0 0.05 }
+    Compass { name "compass" }
+    Emitter { name "emitter" }
+    Receiver { name "receiver" }
+  ]
+  boundingObject Box { size 0.4 0.4 0.1 }
+  physics Physics { density 1000 }
+}
+# ========== ROBOT 2 ==========
+DEF robot2 Robot {
+  translation 1.1 -0.9 0.1
+  name "robot2"
+  controller "swarm_controller"
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.2 0.5 0.8 } geometry Box { size 0.4 0.4 0.1 } }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor -0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "left wheel motor" } ]
+      endPoint Solid {
+        translation -0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor 0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "right wheel motor" } ]
+      endPoint Solid {
+        translation 0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    GPS { name "gps" translation 0 0 0.05 }
+    Compass { name "compass" }
+    Emitter { name "emitter" }
+    Receiver { name "receiver" }
+  ]
+  boundingObject Box { size 0.4 0.4 0.1 }
+  physics Physics { density 1000 }
+}
+# ========== ROBOT 3 ==========
+DEF robot3 Robot {
+  translation 1.3 1.2 0.1
+  name "robot3"
+  controller "swarm_controller"
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.2 0.5 0.8 } geometry Box { size 0.4 0.4 0.1 } }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor -0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "left wheel motor" } ]
+      endPoint Solid {
+        translation -0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor 0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "right wheel motor" } ]
+      endPoint Solid {
+        translation 0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    GPS { name "gps" translation 0 0 0.05 }
+    Compass { name "compass" }
+    Emitter { name "emitter" }
+    Receiver { name "receiver" }
+  ]
+  boundingObject Box { size 0.4 0.4 0.1 }
+  physics Physics { density 1000 }
+}
+# ========== ROBOT 4 ==========
+DEF robot4 Robot {
+  translation -1.0 -1.1 0.1
+  name "robot4"
+  controller "swarm_controller"
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.2 0.5 0.8 } geometry Box { size 0.4 0.4 0.1 } }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor -0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "left wheel motor" } ]
+      endPoint Solid {
+        translation -0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor 0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "right wheel motor" } ]
+      endPoint Solid {
+        translation 0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    GPS { name "gps" translation 0 0 0.05 }
+    Compass { name "compass" }
+    Emitter { name "emitter" }
+    Receiver { name "receiver" }
+  ]
+  boundingObject Box { size 0.4 0.4 0.1 }
+  physics Physics { density 1000 }
+}
+# ========== ROBOT 5 ==========
+DEF robot5 Robot {
+  translation 0.5 -1.3 0.1
+  name "robot5"
+  controller "swarm_controller"
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.2 0.5 0.8 } geometry Box { size 0.4 0.4 0.1 } }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor -0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "left wheel motor" } ]
+      endPoint Solid {
+        translation -0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters { anchor 0.15 -0.25 0 axis 0 1 0 }
+      device [ RotationalMotor { name "right wheel motor" } ]
+      endPoint Solid {
+        translation 0.15 -0.25 0
+        children [ Shape { geometry Cylinder { height 0.05 radius 0.08 } } ]
+        boundingObject Cylinder { height 0.05 radius 0.08 }
+        physics Physics { density 1000 }
+      }
+    }
+    GPS { name "gps" translation 0 0 0.05 }
+    Compass { name "compass" }
+    Emitter { name "emitter" }
+    Receiver { name "receiver" }
+  ]
+  boundingObject Box { size 0.4 0.4 0.1 }
+  physics Physics { density 1000 }
+}
+
+# ========== SUPERVISOR (keyboard & scenario switching) ==========
+DEF SCENE_SUPERVISOR Robot {
+  controller "scene_supervisor"
+  supervisor TRUE
+}

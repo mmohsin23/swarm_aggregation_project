@@ -1,0 +1,8 @@
+Scenario: hard
+Aggregation time: 49.528 seconds
+Robots in target region: 6/6
+Percentage in target region: 100.00%
+Average distance to target: 0.8107 m
+Collision count: 3
+Total path length: 21.3582 m
+CSV file: hard_metrics_20260610_205401.csv

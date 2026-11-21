@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Swarm Scenario Control</title>
+<style>
+body{font-family:Arial,sans-serif;background:#101820;color:#f5f7fa;margin:0;padding:14px}h2{margin:0 0 10px 0;font-size:18px}.row{display:flex;gap:8px;margin-bottom:12px}button{flex:1;border:0;border-radius:8px;padding:12px 8px;font-size:15px;font-weight:700;cursor:pointer;color:white}.easy{background:#238636}.medium{background:#b7791f}.hard{background:#c53030}.card{background:#17212b;border-radius:8px;padding:10px;line-height:1.55;font-size:14px}.small{color:#aab6c2;font-size:12px;margin-top:10px}.ok{color:#8ee695;font-weight:700}.warn{color:#ffd166;font-weight:700}</style>
+</head>
+<body>
+<h2>Swarm Aggregation</h2>
+<div class="row">
+<button class="easy" onclick="sendScenario('easy')">Easy</button>
+<button class="medium" onclick="sendScenario('medium')">Medium</button>
+<button class="hard" onclick="sendScenario('hard')">Hard</button>
+</div>
+<div class="card">
+<div>Scenario: <span id="scenario">easy</span></div>
+<div>Time: <span id="time">0.0</span> s</div>
+<div>Robots in target: <span id="inside">0/6</span></div>
+<div>Average distance: <span id="avg">0.000</span> m</div>
+<div>Collision count: <span id="collisions">0</span></div>
+<div>Status: <span id="done" class="warn">running</span></div>
+</div>
+<div class="small">Click the 3D view before using keyboard: 1 = Easy, 2 = Medium, 3 = Hard.</div>
+<script>
+let controller=null;
+function init(){
+  if(typeof webots!=='undefined'&&webots.window){
+    try{controller=webots.window('scenario_manager')}catch(e){}
+    if(!controller){try{controller=webots.window()}catch(e){}}
+    if(controller){controller.receive=receiveMessage}
+  }
+}
+function sendScenario(name){
+  if(!controller){init()}
+  if(controller&&controller.send){controller.send('scenario:'+name)}
+}
+function receiveMessage(message){
+  const parts=String(message).split(',');
+  if(parts.length<8){return}
+  document.getElementById('scenario').textContent=parts[1];
+  document.getElementById('time').textContent=parts[2];
+  document.getElementById('inside').textContent=parts[3]+'/'+parts[4];
+  document.getElementById('avg').textContent=parts[5];
+  document.getElementById('collisions').textContent=parts[6];
+  const done=document.getElementById('done');
+  if(parts[7]==='1'){
+    done.textContent='metrics generated';
+    done.className='ok';
+  }else{
+    done.textContent='running';
+    done.className='warn';
+  }
+}
+window.addEventListener('load',init);
+setInterval(init,1000);
+</script>
+</body>
+</html>

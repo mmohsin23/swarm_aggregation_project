@@ -1,0 +1,8 @@
+Scenario: medium
+Aggregation time: 76.760 seconds
+Robots in target region: 6/6
+Percentage in target region: 100.00%
+Average distance to target: 0.8002 m
+Collision count: 1
+Total path length: 19.8743 m
+CSV file: medium_metrics_20260626_103802.csv

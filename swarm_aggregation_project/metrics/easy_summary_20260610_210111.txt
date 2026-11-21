@@ -1,0 +1,8 @@
+Scenario: easy
+Aggregation time: 26.136 seconds
+Robots in target region: 6/6
+Percentage in target region: 100.00%
+Average distance to target: 0.8132 m
+Collision count: 0
+Total path length: 12.7956 m
+CSV file: easy_metrics_20260610_210111.csv
